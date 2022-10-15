@@ -16,7 +16,7 @@ public class Employee {
     public long salary;
 
     public Employee(long id, EmployeepayrollDto employeepayrollDto) {
-        this.id=getId();
+        this.id=id;
         this.name=employeepayrollDto.getName();
         this.salary=employeepayrollDto.getSalary();
     }

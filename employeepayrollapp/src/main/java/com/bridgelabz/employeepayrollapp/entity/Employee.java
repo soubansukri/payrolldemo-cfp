@@ -10,12 +10,12 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private int id;
 
     public String name;
     public long salary;
 
-    public Employee(long id, EmployeepayrollDto employeepayrollDto) {
+    public Employee(int id, EmployeepayrollDto employeepayrollDto) {
         this.id=id;
         this.name=employeepayrollDto.getName();
         this.salary=employeepayrollDto.getSalary();
@@ -25,7 +25,7 @@ public class Employee {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -45,7 +45,7 @@ public class Employee {
         this.salary = salary;
     }
 
-    public Employee(long id, String name, long salary) {
+    public Employee(int id, String name, long salary) {
         this.id = id;
         this.name = name;
         this.salary = salary;

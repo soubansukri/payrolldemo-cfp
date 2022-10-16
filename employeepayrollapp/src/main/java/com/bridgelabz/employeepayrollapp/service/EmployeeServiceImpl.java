@@ -17,38 +17,41 @@ public class EmployeeServiceImpl implements IEmployeeService{
         this.repository = repository;
     }
 
+    private List<Employee> employeeList=new ArrayList<>();
+
     @Override
     public List<Employee> getEmployee() {
-        List<Employee> employeePayRollList=new ArrayList<>();
-        employeePayRollList.add(new Employee(1,new EmployeepayrollDto("Afzal",20000)));
-        return employeePayRollList;
+        return employeeList;
 
     }
 
     @Override
-    public Employee getEmployeeById(long empId) {
-        Employee empData=null;
-        empData=new Employee(empId,new EmployeepayrollDto("Pankaj",30000));
-        return empData;
+    public Employee getEmployeeById(int empId) {
+        return employeeList.get(empId-1);
     }
 
     @Override
     public Employee createEmployee(EmployeepayrollDto employeepayrollDto) {
         Employee empData=null;
         empData=new Employee(1,employeepayrollDto);
+        employeeList.add(empData);
+        return empData;
+    }
+
+
+
+    @Override
+    public Employee updateEmployee(int empId, EmployeepayrollDto employeepayrollDto) {
+        Employee empData=this.getEmployeeById(empId);
+        empData.setName(employeepayrollDto.name);
+        empData.setSalary(employeepayrollDto.salary);
+        employeeList.set(empId-1,empData);
         return empData;
     }
 
     @Override
-    public Employee updateEmployee(long empId, EmployeepayrollDto employeepayrollDto) {
-        Employee empData=null;
-        empData=new Employee(empId,employeepayrollDto);
-        return null;
-    }
-
-    @Override
-    public void deleteEmployee(long empId) {
-
+    public void deleteEmployee(int empId) {
+    employeeList.remove(empId-1);
     }
 
 //    public Employee createEmployeePayrollData(EmployeepayrollDto employeepayrollDto);

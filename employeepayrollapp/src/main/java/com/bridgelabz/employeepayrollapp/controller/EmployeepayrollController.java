@@ -22,14 +22,14 @@ public class EmployeepayrollController {
     public ResponseEntity<ResponseDTO>getEmployeePayrollData(){
         List<Employee>empdatalist=null;
         empdatalist=service.getEmployee();
-        ResponseDTO responseDTO=new ResponseDTO("Get Call For ID Successful",empdatalist);
+        ResponseDTO responseDTO=new ResponseDTO("Get Call Successful",empdatalist);
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
 
     @GetMapping ("/get/{empId}")
     public ResponseEntity<ResponseDTO> getEmployeePayrollData(@PathVariable("empId") int empId) {
         Employee empData=service.getEmployeeById(empId);
-        ResponseDTO responseDTO=new ResponseDTO("Created Employee payroll data successfully",empData);
+        ResponseDTO responseDTO=new ResponseDTO("Get Call For ID Successful",empData);
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
 
@@ -48,7 +48,7 @@ public class EmployeepayrollController {
     }
 
     @DeleteMapping("/delete/{empId}")
-    public ResponseEntity<ResponseDTO> deleteEmployeePayrollData(@PathVariable("empId") long empId){
+    public ResponseEntity<ResponseDTO> deleteEmployeePayrollData(@PathVariable("empId") int empId){
         service.deleteEmployee(empId);
         ResponseDTO responseDTO=new ResponseDTO("Deleted successfully","Deleted Id:"+empId);
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);

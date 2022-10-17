@@ -1,6 +1,0 @@
-2022-10-16 18:50:51.178  INFO 1864 --- [restartedMain] c.b.e.EmployeepayrollappApplication      : Starting EmployeepayrollappApplication using Java 19 on souban with PID 1864 (E:\CFP\day4\employeepayrollapp\target\classes started by Personal in E:\CFP\day4\employeepayrollapp)
-2022-10-16 18:50:51.181 DEBUG 1864 --- [restartedMain] c.b.e.EmployeepayrollappApplication      : Running with Spring Boot v2.7.4, Spring v5.3.23
-2022-10-16 18:50:51.182  INFO 1864 --- [restartedMain] c.b.e.EmployeepayrollappApplication      : No active profile set, falling back to 1 default profile: "default"
-2022-10-16 18:51:05.068  WARN 1864 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-10-16 18:51:06.566  INFO 1864 --- [restartedMain] c.b.e.EmployeepayrollappApplication      : Started EmployeepayrollappApplication in 17.133 seconds (JVM running for 21.78)
-2022-10-16 18:51:06.571  INFO 1864 --- [restartedMain] c.b.e.EmployeepayrollappApplication      : Employee payroll app started

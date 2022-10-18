@@ -4,58 +4,42 @@ import com.bridgelabz.employeepayroll.dto.EmployeePayrollDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
-public class Employee {
+public @Data class Employee {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     public String name;
     public long salary;
+    public String gender;
+    public LocalDate startDate;
+    public String note;
+    public String profilePic;
+    @Column()
+    @ElementCollection
+    public List<String> departments;
 
 
     public Employee(int id, EmployeePayrollDto employeepayrollDto) {
         this.id=id;
-        this.name=employeepayrollDto.getName();
-        this.salary=employeepayrollDto.getSalary();
+        this.updateEmployee(employeepayrollDto);
     }
 
-    public long getId() {
-        return id;
+    public void updateEmployee(EmployeePayrollDto empPayrollDto){
+        this.name=empPayrollDto.name;
+        this.salary= empPayrollDto.salary;
+        this.gender=empPayrollDto.gender;
+        this.note= empPayrollDto.note;
+        this.startDate=empPayrollDto.startDate;
+        this.profilePic= empPayrollDto.profilePic;
+        this.departments=empPayrollDto.departments;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public long getSalary() {
-        return salary;
-    }
-
-    public void setSalary(long salary) {
-        this.salary = salary;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", salary=" + salary +
-                '}';
-    }
 }

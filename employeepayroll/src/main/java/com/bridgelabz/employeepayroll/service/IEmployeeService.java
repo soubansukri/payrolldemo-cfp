@@ -8,7 +8,7 @@ import java.util.List;
 public interface IEmployeeService {
     List<Employee> getEmployee();
 
-    Employee getEmployeeById(int empId);
+    Employee getEmpById(int empId);
 
     Employee createEmployee(EmployeePayrollDto employeepayrollDto);
 

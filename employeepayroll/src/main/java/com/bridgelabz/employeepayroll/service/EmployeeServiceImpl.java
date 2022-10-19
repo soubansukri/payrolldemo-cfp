@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,25 +21,21 @@ public class EmployeeServiceImpl implements IEmployeeService{
         this.repository = repository;
     }
 
-    private List<Employee> employeeList=new ArrayList<>();
-
-    @Override
-    public List<Employee> getEmployee() {
-        return employeeList;
-
+    public List<Employee> getEmployee(){
+        return repository.findAll();
     }
 
     @Override
-    public Employee getEmployeeById(int empId) {
-        return employeeList.stream().filter(empData -> empData.getEmpId()==empId)
-                .findFirst().orElseThrow(()->new EmployeePayrollException("Employee not found"));
+    public Employee getEmpById(int empId) {
+        return repository.findById(empId).
+                orElseThrow( () -> new EmployeePayrollException("Employee with employee Id"+empId+"does not exists.."));
     }
+
 
     @Override
     public Employee createEmployee(EmployeePayrollDto employeepayrollDto) {
         Employee empData=null;
         empData=new Employee(employeepayrollDto);
-        employeeList.add(empData);
         log.debug("Emp Data:"+empData.toString());
         return repository.save(empData);
     }
@@ -49,15 +44,14 @@ public class EmployeeServiceImpl implements IEmployeeService{
 
     @Override
     public Employee updateEmployee(int empId, EmployeePayrollDto employeepayrollDto) {
-        Employee empData=this.getEmployeeById(empId);
-        empData.setName(employeepayrollDto.name);
-        empData.setSalary(employeepayrollDto.salary);
-        employeeList.set(empId-1,empData);
-        return empData;
+        Employee empData=this.getEmpById(empId);
+        empData.updateEmployee(employeepayrollDto);
+        return repository.save(empData);
     }
 
     @Override
     public void deleteEmployee(int empId) {
-        employeeList.remove(empId-1);
+        Employee empData=this.getEmpById(empId);
+        repository.delete(empData);
     }
 }

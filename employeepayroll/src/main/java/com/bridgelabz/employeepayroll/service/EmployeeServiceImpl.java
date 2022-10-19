@@ -1,18 +1,21 @@
 package com.bridgelabz.employeepayroll.service;
 
-import com.bridgelabz.employeepayroll.EmployeepayrollApplication;
 import com.bridgelabz.employeepayroll.dto.EmployeePayrollDto;
 import com.bridgelabz.employeepayroll.entity.Employee;
 import com.bridgelabz.employeepayroll.exceptions.EmployeePayrollException;
 import com.bridgelabz.employeepayroll.repository.IEmployeeRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class EmployeeServiceImpl implements IEmployeeService{
 
+    @Autowired
     private final IEmployeeRepository repository;
 
     public EmployeeServiceImpl(IEmployeeRepository repository) {
@@ -29,16 +32,17 @@ public class EmployeeServiceImpl implements IEmployeeService{
 
     @Override
     public Employee getEmployeeById(int empId) {
-        return employeeList.stream().filter(empData -> empData.getId()==empId)
+        return employeeList.stream().filter(empData -> empData.getEmpId()==empId)
                 .findFirst().orElseThrow(()->new EmployeePayrollException("Employee not found"));
     }
 
     @Override
     public Employee createEmployee(EmployeePayrollDto employeepayrollDto) {
         Employee empData=null;
-        empData=new Employee(1,employeepayrollDto);
+        empData=new Employee(employeepayrollDto);
         employeeList.add(empData);
-        return empData;
+        log.debug("Emp Data:"+empData.toString());
+        return repository.save(empData);
     }
 
 

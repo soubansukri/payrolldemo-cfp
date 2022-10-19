@@ -1,14 +1,7 @@
 package com.bridgelabz.employeepayroll.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.DateSerializer;
-import lombok.Data;
 import lombok.ToString;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.Column;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.List;
